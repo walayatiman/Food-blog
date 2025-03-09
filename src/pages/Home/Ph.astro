@@ -1,0 +1,73 @@
+---
+import ImageContainer from "../../components/ImageContainer.astro";
+import Philippines from "./img/philippines.png";
+import Btn from "../../components/Btn.astro";
+---
+
+<!-- <div class="ph-container">
+  <ImageContainer item={Philippines} alt="philippines" className="ph" />
+  <div class="container">
+    <h3>From our founder, Margaret</h3>
+    <h2>The story of coffee is an Asian story</h2>
+    <p>
+      “Kahawa” means “coffee” in Swahili -- our language -- and 1893 is when our
+      story begins. While coffee’s origins can be traced back to ancient forests
+      in Ethiopia, coffee had to travel around the world before it made its way
+      back to Africa in the late 1800s. My grandfather was a driver for the
+      colonial government, and managed to get his hands on some seedlings to
+      start his own coffee farm.
+    </p>
+    <Btn
+      href="#"
+      name="Read More"
+      className="custom-btn"
+      bgColor="#e7501e"
+      textColor="#f4d1b3"
+    />
+  </div>
+</div> -->
+<style is:inline>
+  .ph-container {
+    position: relative;
+    padding: 5% 2%;
+    background-color: #f8bdaf;
+
+    .ph {
+      max-width: 250px;
+      opacity: 0.1;
+      position: absolute !important;
+      right: 5%;
+    }
+
+    .container {
+      padding: 2rem 0;
+      & * {
+        max-width: 630px;
+        margin-inline: auto;
+        text-align: center;
+        margin-bottom: 2%;
+        color: #e7501e;
+        line-height: normal;
+      }
+
+      @media (max-width: 500px) {
+        h2 {
+          margin-bottom: 2rem;
+          font-size: 25px;
+        }
+
+        h3 {
+          font-size: 22px;
+        }
+
+        p {
+          margin-bottom: 2rem;
+        }
+      }
+
+      /* .custom-btn {
+        background-color: #e7501e;
+      } */
+    }
+  }
+</style>

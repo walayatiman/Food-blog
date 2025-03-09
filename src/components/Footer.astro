@@ -1,0 +1,414 @@
+---
+import Icon from "./Icons";
+
+const shop = [
+  {
+    name: "Shop All",
+    url: "/collections/all-products",
+  },
+  {
+    name: "Bundles",
+    url: "/collections/bundles",
+  },
+  {
+    name: "Single Serves",
+    url: "/products/single-serve-coffee-packs",
+  },
+  {
+    name: "Medium Roast",
+    url: "/collections/medium-roast",
+  },
+  {
+    name: "Dark Roast",
+    url: "/collections/dark-roast",
+  },
+  {
+    name: "Light Roast",
+    url: "/collections/light-roast",
+  },
+  {
+    name: "Keurig® K-Cup® Pods",
+    url: "/collections/keurig%C2%AE-k-cups",
+  },
+  {
+    name: "Flavored",
+    url: "/products/african-chai-spice-coffee",
+  },
+  {
+    name: "Decaf",
+    url: "/products/decaf-blend",
+  },
+  {
+    name: "Merch",
+    url: "/collections/accessories",
+  },
+  {
+    name: "Gifts",
+    url: "/collections/gifts",
+  },
+  {
+    name: "Subscriptions",
+    url: "/collections/subscriptions",
+  },
+];
+
+const about = [
+  {
+    name: "Our Story",
+    url: "/pages/our-story",
+  },
+  {
+    name: "Impact",
+    url: "/pages/impact",
+  },
+  {
+    name: "Tip Our Farmers",
+    url: "/products/tip",
+  },
+  {
+    name: "Press",
+    url: "/pages/press",
+  },
+  {
+    name: "Store Locator",
+    url: "/pages/store-locator",
+  },
+  {
+    name: "Wholesale",
+    url: "/pages/wholesale",
+  },
+];
+
+const help = [
+  {
+    name: "Our Story",
+    url: "/pages/our-story",
+  },
+  {
+    name: "Impact",
+    url: "/pages/impact",
+  },
+  {
+    name: "Tip Our Farmers",
+    url: "/products/tip",
+  },
+  {
+    name: "Press",
+    url: "/pages/press",
+  },
+  {
+    name: "Store Locator",
+    url: "/pages/store-locator",
+  },
+  {
+    name: "Wholesale",
+    url: "/pages/wholesale",
+  },
+];
+---
+
+<div class="waves-container">
+  <svg
+    class="waves"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28"
+    preserveAspectRatio="none"
+    shape-rendering="auto"
+  >
+    <defs>
+      <path
+        id="gentle-wave"
+        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+      ></path>
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(246, 160, 25,0.7"
+      ></use>
+      <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(246, 160, 25,0.5)"
+      ></use>
+      <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(246, 160, 25,0.3)"
+      ></use>
+      <use xlink:href="#gentle-wave" x="48" y="7" fill="#f6a019"></use>
+    </g>
+  </svg>
+</div>
+
+<div class="footer-container">
+  <div class="column">
+    <h4>For New Subscribers</h4>
+    <p>
+      Sign up for our mailing list and get 10% off your next order +
+      subscriber-only deals.
+    </p>
+    <section class="form-container">
+      <form action="/submit-email" method="post">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your email address"
+          required
+        />
+
+        <input type="submit" value="Subscribe" />
+      </form>
+    </section>
+  </div>
+  <div class="column">
+    <h4>Follow Us</h4>
+    <section class="icon-containers">
+      <a href="http://facebook.com">
+        <Icon
+          size={24}
+          set="fa"
+          name={"FaFacebookF"}
+          client:load
+          className="facebook"
+        />
+      </a>
+      <a href="http://facebook.com">
+        <Icon
+          size={24}
+          set="fa"
+          name={"FaTwitter"}
+          client:load
+          className="twitter"
+        />
+      </a>
+      <a href="http://facebook.com">
+        <Icon
+          size={24}
+          set="fa"
+          name={"FaInstagram"}
+          client:load
+          className="instagram"
+        />
+      </a>
+    </section>
+  </div>
+  <div class="column">
+    <h4>Shop</h4>
+    {
+      (
+        <ul class="links">
+          {shop.map((e) => (
+            <li>
+              <a href={e.url}>{e.name}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <div class="column">
+    <h4>About Us</h4>{
+      (
+        <ul class="links">
+          {about.map((e) => (
+            <li>
+              <a href={e.url}>{e.name}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <div class="column">
+    <h4>Help</h4>
+    {
+      (
+        <ul class="links">
+          {help.map((e) => (
+            <li>
+              <a href={e.url}>{e.name}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .footer-container {
+    background-color: var(--dark-yellow);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 3rem;
+
+    * {
+      color: var(--dark-blue);
+    }
+
+    h4 {
+      margin-bottom: 2rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.6rem;
+    }
+
+    .form-container {
+      form {
+        display: flex;
+        border-bottom: 1px solid var(--dark-blue);
+        input {
+          border: none;
+          background: transparent;
+          padding: 10px;
+
+          &:active {
+            border: none;
+            outline: none;
+          }
+          &:hover {
+            border: none;
+            outline: none;
+          }
+        }
+        input[type="submit"] {
+          cursor: pointer;
+          transition: all ease-in-out 0.25s;
+
+          &:hover {
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+
+    .icon-containers {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        a {
+          transform: scale(1.05) translatey(-5%);
+          &:not(:hover) {
+            opacity: 0.7;
+            transform: scale(0.85);
+          }
+        }
+      }
+    }
+
+    .links {
+      position: relative;
+      li {
+        position: relative;
+        margin-bottom: 10px;
+        width: max-content;
+      }
+      a {
+        padding: 5px 0 5px 0;
+        transition:
+          color 0.2s ease-in-out,
+          opacity 0.2s ease-in-out;
+        display: block;
+        width: 100%;
+        text-align: inherit;
+        background-color: transparent;
+        text-decoration: none;
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          left: 0;
+          bottom: 0;
+          background: var(--dark-blue);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.2s ease-in-out;
+        }
+
+        &:hover {
+          color: inherit;
+          opacity: 1;
+          &::before {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+
+  .waves-container {
+    .waves {
+      position: relative;
+      width: 100%;
+      height: 15vh;
+      margin-bottom: -7px; /*Fix for safari gap*/
+      min-height: 100px;
+      max-height: 150px;
+      background-color: var(--yellow);
+    }
+
+    .content {
+      position: relative;
+      height: 20vh;
+      text-align: center;
+      background-color: white;
+    }
+
+    path {
+      fill: #f6a019;
+    }
+
+    /* Animation */
+
+    .parallax > use {
+      animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+    }
+    .parallax > use:nth-child(1) {
+      animation-delay: -2s;
+      animation-duration: 7s;
+    }
+    .parallax > use:nth-child(2) {
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+    .parallax > use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 13s;
+    }
+    .parallax > use:nth-child(4) {
+      animation-delay: -5s;
+      animation-duration: 20s;
+    }
+
+    /*Shrinking for mobile*/
+    @media (max-width: 768px) {
+      .waves {
+        height: 40px;
+        min-height: 40px;
+      }
+      .content {
+        height: 30vh;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  }
+
+  @keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+</style>

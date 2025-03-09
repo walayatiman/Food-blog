@@ -1,0 +1,278 @@
+---
+import First from "./img/1.png";
+import Second from "./img/2.png";
+import Third from "./img/3.png";
+import Fourth from "./img/4.png";
+import Fifth from "./img/5.png";
+import Sixth from "./img/6.png";
+const collections = [
+  {
+    title: "Bundles",
+    subtitle: "Best-selling variety packs",
+    href: "/collections/bundles",
+    imageUrl: First,
+    buttonLabel: "View products",
+    price: 25,
+  },
+  {
+    title: "Medium Roast",
+    subtitle: "Fresh roasted coffee bags",
+    href: "/collections/medium-roast",
+    imageUrl: Second,
+    buttonLabel: "View products",
+    price: 29,
+  },
+  {
+    title: "Dark Roast",
+    subtitle: "Fresh roasted coffee bags",
+    href: "/collections/dark-roast",
+    imageUrl: Third,
+    buttonLabel: "View products",
+  },
+  {
+    title: "Light Roast",
+    subtitle: "Fresh roasted coffee bags",
+    href: "/collections/light-roast",
+    imageUrl: Fourth,
+    buttonLabel: "View products",
+  },
+  {
+    title: "African Spice",
+    subtitle: "Coffee flavored with fresh spices",
+    href: "/collections/light-roast",
+    imageUrl: Fifth,
+    buttonLabel: "View products",
+  },
+  {
+    title: "Decaf",
+    subtitle: "All taste, no caffeine",
+    href: "/collections/light-roast",
+    imageUrl: Sixth,
+    buttonLabel: "View products",
+  },
+];
+
+import Btn from "../../components/Btn.astro";
+import ImageContainer from "../../components/ImageContainer.astro";
+import Button from "../../components/Button.astro";
+import Icon from "../../components/Icons";
+
+const hightlight = collections.slice(0, 2);
+---
+
+<div class="products-container">
+  <div class="container">
+    {
+      collections.map((e) => (
+        <a href={e.href} class="link-wrapper">
+          <div class="img-wrapper">
+            <ImageContainer
+              item={e.imageUrl}
+              alt="product-img"
+              className="product-img"
+            />
+          </div>
+          <div class="content-wrapper">
+            <h5>{e.subtitle}</h5>
+            <h2>{e.title}</h2>
+            <Btn
+              href={e.href}
+              name="Learn More"
+              className="btn"
+              bgColor="#ffffff"
+              textColor="#363636"
+            />
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<div class="two-products">
+  <div class="container">
+    {
+      hightlight.map((item) => (
+        <div class="product-item">
+          <a href={item.href}>
+            <ImageContainer
+              item={item.imageUrl}
+              alt="highlight product"
+              className="highligh product"
+            />
+          </a>
+          <div class="product-item-content">
+            <h5>{item.subtitle}</h5>
+            <h2>{item.title}</h2>
+            <span class="ratings-container">
+              {[...Array(5)].map((_, index) => (
+                <Icon
+                  size={24}
+                  set="fa"
+                  name={"FaStar"}
+                  client:load
+                  className="star-icon"
+                />
+              ))}
+            </span>
+            <p>${item.price}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div class="btn-container">
+    <Button href="#" name="Shop Keurig® K-Cup® Pods" className="blue-btn" />
+  </div>
+</div>
+
+<style>
+  .products-container {
+    background-color: var(--yellow);
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 3rem;
+      padding-top: 5%;
+      padding-bottom: 5%;
+
+      @media (max-width: 500px) {
+        padding: 2rem 1rem;
+      }
+
+      a {
+        display: block;
+        position: relative;
+        text-decoration: none;
+
+        .collections {
+          display: block;
+          height: 600px;
+        }
+      }
+
+      .img-wrapper {
+        overflow: hidden;
+        &::after {
+          background: linear-gradient(to top, #040404a6, #36363633);
+          content: "";
+          position: absolute;
+          top: 0;
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+
+        .picture-container {
+          transform: scale(1);
+          transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        &:hover {
+          .picture-container {
+            transform: scale(1.3);
+            transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+        }
+      }
+
+      .content-wrapper {
+        z-index: 2;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 2rem;
+        box-sizing: border-box;
+
+        h5,
+        h2 {
+          color: #fff;
+          margin-bottom: 10px;
+        }
+
+        h5 {
+          @media (max-width: 500px) {
+            font-size: 25px;
+          }
+        }
+        h2 {
+          @media (max-width: 500px) {
+            font-size: 50px;
+            margin-bottom: 2rem;
+          }
+        }
+        button {
+          margin-top: 4%;
+        }
+      }
+    }
+  }
+
+  .two-products {
+    background-color: var(--yellow);
+    padding-top: 5%;
+    padding-bottom: 2rem;
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 5rem;
+
+      .product-item-content {
+        text-align: center;
+        * {
+          margin-bottom: 10px;
+        }
+      }
+
+      h5 {
+        @media (max-width: 500px) {
+          font-size: 16px;
+        }
+      }
+
+      h2 {
+        @media (max-width: 500px) {
+          font-size: 22px;
+        }
+      }
+
+      p {
+        color: #e64f1d;
+      }
+
+      a {
+        .highligh {
+          transition: all ease-in-out 0.25s;
+        }
+        &:hover {
+          .highligh {
+            rotate: 30deg;
+          }
+        }
+      }
+    }
+
+    .star-icon path {
+      fill: #15ad96;
+    }
+
+    .ratings-container {
+      position: relative;
+      display: flex;
+      margin-bottom: 10px;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn-container {
+      padding-top: 5%;
+      padding-bottom: 5%;
+      a {
+        margin-inline: auto;
+      }
+    }
+  }
+</style>

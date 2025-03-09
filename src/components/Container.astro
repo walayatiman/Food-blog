@@ -1,0 +1,10 @@
+---
+const { title, bg, className } = Astro.props;
+---
+
+<section
+  style={`background-image:  url("${bg}"); background-size:cover; background-position:center; background-repeat:no-repeat`}
+  class={className}
+>
+  <div class="container"><slot /></div>
+</section>

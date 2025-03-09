@@ -1,0 +1,74 @@
+---
+export interface Props {
+  href: string;
+  className?: string;
+  name: string;
+  bgColor: string;
+  textColor: string;
+  hoverBgColor: string;
+  icon?: boolean;
+  iconSet?: string;
+  iconName?: string;
+  hoverTextColor: string;
+  border?: string; // New optional border prop
+}
+
+const {
+  href,
+  className,
+  name,
+  bgColor,
+  textColor,
+  hoverBgColor,
+  hoverTextColor,
+  icon,
+  iconSet,
+  iconName,
+  border,
+} = Astro.props;
+
+import IconX from "./Icons";
+---
+
+<a
+  href={href}
+  class={className}
+  style={`
+    background-color: ${bgColor.startsWith("--") ? `var(${bgColor})` : bgColor};
+    color: ${textColor.startsWith("--") ? `var(${textColor})` : textColor};
+    ${border ? `border: 2px solid ${border.startsWith("--") ? `var(${border})` : border};` : "border: none;"}
+  `}
+>
+  {name}
+  {icon && <IconX size={24} set={iconSet} name={iconName} client:load />}
+</a>
+
+<style
+  define:vars={{ bgColor, textColor, hoverBgColor, hoverTextColor, border }}
+>
+  a {
+    min-width: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    text-align: center;
+    width: max-content;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 300px;
+    transition: all 0.25s ease-in-out;
+
+    svg {
+      margin: 0 !important;
+    }
+
+    &:hover {
+      background-color: var(--hoverBgColor) !important;
+      color: var(--hoverTextColor) !important;
+    }
+  }
+</style>

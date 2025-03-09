@@ -1,0 +1,29 @@
+.custom-accordion {
+  padding: 0;
+
+  .title-wrapper {
+    padding: 10px;
+    background-color: #00427a;
+    transition: all ease-in-out 0.25s;
+
+    &:hover {
+      background-color: #0083c5;
+    }
+
+    h5 {
+      color: #fff !important;
+    }
+  }
+
+  &.et_pb_toggle_open {
+    .title-wrapper {
+      background-color: #0083c5;
+    }
+  }
+
+  .et_pb_toggle_content {
+    padding: 10px;
+    background-color: #fff;
+    color: #00427a !important;
+  }
+}

@@ -1,0 +1,27 @@
+---
+import Menu from "../components/Menu/Menu.astro";
+import Head from "../components/Head.astro";
+import "../../node_modules/normalize.css";
+import Footer from "../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <Head />
+  <body>
+    <!-- <Menu /> -->
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  import Lenis from "lenis";
+
+  const lenis = new Lenis({ autoRaf: true });
+
+  //get scroll value
+  lenis.on("scroll", (e) => {});
+</script>

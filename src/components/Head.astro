@@ -1,0 +1,58 @@
+---
+import { siteConfig } from "../../site.config";
+import Globalstyles from "./Globalstyles.astro";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+  <meta name="generator" content={Astro.generator} />
+  <title>{siteConfig.title} | {siteConfig.metaTitle}</title>
+  <meta
+    name="title"
+    content={`${siteConfig.title} | ${siteConfig.metaTitle}`}
+  />
+  <meta name="description" content={`${siteConfig.description}`} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="wws.com" />
+  <meta
+    property="og:title"
+    content={`${siteConfig.title} | ${siteConfig.metaTitle}`}
+  />
+  <meta property="og:description" content={`${siteConfig.description}`} />
+  <meta
+    property="og:image"
+    content="https://metatags.io/images/meta-tags.png"
+  />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="wws.com" />
+  <meta
+    property="twitter:title"
+    content={`${siteConfig.title} | ${siteConfig.metaTitle}`}
+  />
+  <meta property="twitter:description" content={`${siteConfig.description}`} />
+  <meta
+    property="twitter:image"
+    content="https://metatags.io/images/meta-tags.png"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.ico" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+  <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.19/dist/lenis.css" />
+
+  <Globalstyles />
+</head>

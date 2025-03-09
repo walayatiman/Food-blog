@@ -1,0 +1,275 @@
+---
+import { siteConfig } from "../../../site.config";
+const allLinks = [...siteConfig.navLinks];
+import Icon from "../Icons";
+import ImageContainer from "../ImageContainer.astro";
+import logo from "./logo.webp";
+---
+
+<header>
+  <nav class="main-menu">
+    <div class="container">
+      <div class="logo">
+        <ImageContainer item={logo} alt="logo" className="logo" />
+      </div>
+      <div class="right">
+        <ul>
+          {
+            siteConfig.navLinks.map(({ title, url }) => (
+              <li>
+                <a href={url}>{title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="mobile">
+    <div class="mobile-menu container">
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <div class="icons">
+        <Icon
+          size={24}
+          set="ci"
+          name={"CiSearch"}
+          client:load
+          className="search-btn"
+        />
+        <Icon
+          size={24}
+          set="ci"
+          name={"CiShoppingCart"}
+          client:load
+          className="cart-btn"
+        />
+      </div>
+    </div>
+    <div class="side-menu-container">
+      <Icon
+        size={24}
+        set="fi"
+        name={"FiXOctagon"}
+        client:load
+        className="close-btn"
+      />
+
+      <ul class="sideMenu">
+        {
+          allLinks.map(({ title, url }) => (
+            <li>
+              <a href={url}>{title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="search">
+      <Icon
+        size={24}
+        set="ci"
+        name={"CiSearch"}
+        client:load
+        className="search-btn"
+      />
+      <input type="text" class="search-input" placeholder="Search..." />
+      <Icon
+        size={24}
+        set="fi"
+        name={"FiXOctagon"}
+        client:load
+        className="search-close-btn"
+      />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .announcements {
+    @media (max-width: 981px) {
+      .main-menu {
+        display: none;
+      }
+    }
+    .announcement {
+      background-color: var(--creame);
+      text-align: center;
+      color: var(--dark-blue);
+      padding: 10px;
+    }
+
+    .main-menu {
+      background-color: var(--dark-blue);
+      padding: 2rem 0;
+      transition: all ease-in-out 0.25s;
+
+      &:hover {
+        background-color: var(--yellow);
+
+        a,
+        h4 {
+          color: var(--dark-blue) !important;
+        }
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left,
+        .right {
+          ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+
+            li {
+              a {
+                color: #fff;
+                text-decoration: none;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+
+        .logo {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .mobile {
+    position: relative;
+    @media (min-width: 981px) {
+      display: none;
+    }
+    background-color: var(--dark-blue);
+    .mobile-menu {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+
+      .icons {
+        width: max-content;
+        display: flex;
+        gap: 2rem;
+
+        svg {
+          fill: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      width: max-content;
+    }
+
+    .side-menu-container {
+      position: absolute;
+      transform: translateX(-100%);
+      top: 0;
+      height: 100vh;
+      padding: 2rem;
+      background-color: var(--yellow);
+      transition: all ease-in-out 0.25s;
+      z-index: 3;
+      ul {
+        margin-top: 2rem;
+        li {
+          margin-bottom: 1rem;
+          list-style: none;
+          a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 400;
+            font-family: "Hey";
+            font-size: 20px;
+          }
+        }
+      }
+
+      .close-btn {
+        cursor: pointer;
+      }
+    }
+
+    .bar {
+      background-color: white;
+      height: 3px;
+      width: 25px;
+      margin: 3px 0;
+    }
+  }
+
+  .search {
+    background-color: var(--yellow);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+    position: absolute;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    z-index: -1;
+
+    .search-input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      padding: 20px 5px;
+      font-size: 20px;
+      font-family: "Hey";
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+
+      &::placeholder {
+        font-size: 20px;
+        font-family: "Hey";
+      }
+    }
+
+    &.open {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 2;
+    }
+  }
+</style>
+
+<script is:inline>
+  $("#mobile-menu").on("click", function () {
+    $(".side-menu-container").css("transform", "translateX(0)");
+  });
+
+  $(".close-btn").on("click", function () {
+    $(".side-menu-container").css("transform", "translateX(-100%)");
+  });
+
+  $("#search").on("click", function () {
+    $(".search").toggleClass("open");
+  });
+
+  $(".search-close-btn").on("click", function () {
+    $(".search").removeClass("open");
+  });
+</script>
