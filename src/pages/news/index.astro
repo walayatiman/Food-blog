@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+
+const news = await getCollection("news");
+---
+
+<h1>News Articles</h1>
+
+<ul>
+  {
+    news.map((article: any) => {
+      // Construct the image path
+      const imagePath = article.data.image?.url
+        ? `/news/${article.slug}/${article.data.image.url.replace("./", "")}`
+        : null;
+
+      return (
+        <li key={article.id}>
+          <h2>
+            <a href={`/news/${article.slug}/`}>{article.data.title}</a>
+          </h2>
+          <p>
+            <strong>Author:</strong> {article.data.author}
+          </p>
+          <p>
+            <strong>Published:</strong> {article.data.pubDate.toDateString()}
+          </p>
+          <p>{article.data.description}</p>
+
+          {imagePath && (
+            <img src={imagePath} alt={article.data.image.alt} width="300" />
+          )}
+
+          <a href={`/news/${article.slug}/`}>Read More →</a>
+        </li>
+      );
+    })
+  }
+</ul>

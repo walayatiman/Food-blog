@@ -33,3 +33,5 @@ const Icon = ({ name, set = 'fa', size = 24, color = 'currentColor', className =
 
 export default Icon;
 
+
+{/* <IconX size={24} set="ci" name={"CiSearch"} client:load /> */}

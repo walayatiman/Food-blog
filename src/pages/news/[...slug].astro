@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("news");
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const { title, description, pubDate, image } = Astro.props.data;
+const body = Astro.props.rendered.html;
+---
+
+<h1>{title}</h1>
+<p><strong>Published:</strong> {pubDate.toDateString()}</p>
+
+{image?.url && <img src={image.url} alt={image.alt} width="500" />}
+
+<p>{description}</p>
+
+<hr />
+
+<article set:html={body} />
+
+<a href="/news/">← Back to News</a>

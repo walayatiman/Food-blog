@@ -1,5 +1,6 @@
 ---
-import Icon from "./Icons";
+import IconX from "./Icons";
+import Button from "./Button.astro";
 
 const menu = [
   {
@@ -54,10 +55,10 @@ const menu = [
         ></svg
       >
     </div>
-    <div class="column">
+    <div class="column links">
       {
         (
-          <ul class="links">
+          <ul id="links">
             {menu.map((e) => (
               <li>
                 <a href={e.url}>{e.title}</a>
@@ -67,18 +68,117 @@ const menu = [
         )
       }
     </div>
-    <div class="column"></div>
+    <div class="column sm-icons">
+      <a
+        href="http://www.facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><IconX size={24} set="fa" name={"FaFacebookF"} client:load /></a
+      ><a
+        href="http://www.twitter.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><IconX size={24} set="fa" name={"FaTwitter"} client:load /></a
+      ><a
+        href="http://www.instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><IconX size={24} set="fa" name={"FaInstagram"} client:load /></a
+      ><a
+        href="http://www.linkedin.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><IconX size={24} set="fa" name={"FaLinkedinIn"} client:load /></a
+      >
+    </div>
+  </div>
+  <div class="container up-btn">
+    <Button
+      href="#top"
+      className="top-btn"
+      name="Back to Top"
+      bgColor="--dark-blue"
+      textColor="white"
+      hoverBgColor="white"
+      hoverTextColor="--dark-blue"
+      icon={false}
+      iconSet="io"
+      iconName="IoIosArrowForward"
+      border="#fff"
+    />
+  </div>
+  <div class="container copyright">
+    <ul>
+      <li>© Copyright AWIN 2025</li>
+      <li>Company No. 14657764</li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Cookie Policy</a></li>
+    </ul>
+    <div class="website">
+      <a href="#" target="_blank" rel="follow" class="website-link">
+        <span
+          >website by <span class="text-white">rustymace<sup>®</sup></span
+          ></span
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-3"
+          viewBox="0 0 24 12"
+          ><g fill="#FFF" fill-rule="evenodd"
+            ><path d="M0 6h13.8V0H0z"></path><path
+              fill-opacity=".5"
+              d="M0 12h24V6H0z"></path></g
+          ></svg
+        >
+      </a>
+    </div>
   </div>
 </div>
 
 <style>
   .footer-container {
     background-color: var(--dark-blue);
-    padding: 2rem;
+    padding: 5rem 2rem;
+
+    @media (max-width: 500px) {
+      padding: 5rem 2rem;
+    }
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: 5rem;
+
+      @media (max-width: 500px) {
+        gap: 3rem;
+        padding: 0;
+      }
+      .sm-icons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+        gap: 1rem;
+        a {
+          position: relative;
+          display: block;
+          border: 1px solid #ffffff52;
+          width: max-content;
+          padding: 1rem;
+          border-radius: 300px;
+          height: 58px;
+          transition: all ease-in-out 0.25s;
+
+          @media (max-width: 810px) {
+            margin: 0 auto;
+          }
+
+          &:hover {
+            border: 1px solid #fff;
+          }
+        }
+        svg {
+          fill: #fff;
+          aspect-ratio: 1;
+        }
+      }
     }
 
     * {
@@ -151,17 +251,128 @@ const menu = [
       }
       a {
         padding: 5px 0 5px 0;
-
         display: block;
         width: 100%;
         text-align: inherit;
         background-color: transparent;
         text-decoration: none;
-        font-size: 13px;
+        font-size: 16px;
         text-transform: uppercase;
         font-weight: bold;
         color: #fff;
       }
     }
+
+    .footer-menu-container {
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: 980px) {
+        gap: 2rem;
+      }
+
+      @media (max-width: 500px) {
+        a {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .up-btn {
+      border-bottom: 1px solid #ffffff80;
+      align-items: center;
+      justify-content: center;
+      display: flex !important;
+      margin-top: 5%;
+
+      @media (max-width: 500px) {
+        margin-top: 15%;
+        margin-bottom: 25%;
+      }
+      a {
+        border: 1px solid #fff !important;
+        margin-bottom: -25px;
+      }
+    }
+    .copyright {
+      margin-top: 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+
+      @media (max-width: 810px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        margin-top: 15%;
+      }
+      ul {
+        display: flex;
+        gap: 1rem;
+        @media (max-width: 500px) {
+          flex-direction: column;
+        }
+        li {
+          color: #ffffff80;
+          margin-right: 10px;
+          line-height: 1.6rem;
+
+          &:not(:first-child) {
+            list-style-type: disc;
+
+            @media (max-width: 500px) {
+              list-style-type: none;
+            }
+          }
+
+          a {
+            color: #fff;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .website {
+        span {
+          color: #ffffff70;
+
+          .text-white {
+            color: #fff;
+            font-weight: bold;
+          }
+        }
+        svg {
+          max-width: 20px;
+        }
+      }
+    }
   }
 </style>
+
+<script is:inline>
+  $(function () {
+    const $menu = $("#links"); // Select the original <ul>
+    const $items = $menu.children("li"); // Get all <li> items
+    const middleIndex = Math.ceil($items.length / 2); // Find the split point
+
+    // Create two new <ul> elements
+    const $column1 = $("<ul>").addClass("footer-menu-column");
+    const $column2 = $("<ul>").addClass("footer-menu-column");
+
+    // Split items into two columns
+    $items.each(function (index) {
+      if (index < middleIndex) {
+        $column1.append($(this)); // First half
+      } else {
+        $column2.append($(this)); // Second half
+      }
+    });
+
+    // Wrap the two columns in a container
+    const $container = $("<div>")
+      .addClass("footer-menu-container")
+      .append($column1, $column2);
+
+    // Replace the original menu with the new structure
+    $menu.replaceWith($container);
+  });
+</script>

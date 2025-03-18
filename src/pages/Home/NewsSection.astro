@@ -1,0 +1,49 @@
+---
+// import { getCollection, getEntry } from "astro:content";
+// const allNews = Object.values(
+//   import.meta.glob("../news/**/index.md", { eager: true })
+// );
+
+// const newsz = await getCollection("news");
+// console.log(newsz);
+---
+
+<!-- <div id="news">
+  <div class="container">
+    <ul>
+      {
+        allNews.map((news: any) => (
+          <li>
+            <a href={news.url}>{news.frontmatter.title}</a>
+            <img
+              src={news.frontmatter.image.url}
+              alt={news.frontmatter.image.alt}
+            />
+            <p>{news.frontmatter.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div> -->
+<style>
+  #news {
+    padding: 5% 0;
+
+    .container {
+      ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 2rem;
+
+        li {
+          img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+</style>
