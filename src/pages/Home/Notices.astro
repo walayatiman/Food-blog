@@ -192,18 +192,20 @@ const accordionItems = [
   }
 </style>
 
-<script is:inline>
-  $(function () {
-    $(".title-container").on("click", function () {
-      let parent = $(this).parent();
-      parent.toggleClass("active");
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    $(function () {
+      $(".title-container").on("click", function () {
+        let parent = $(this).parent();
+        parent.toggleClass("active");
 
-      let content = parent.find(".accordion-content");
-      if (parent.hasClass("active")) {
-        content.stop(true, true).slideDown(300); // Slide down when active
-      } else {
-        content.stop(true, true).slideUp(300); // Slide up when inactive
-      }
+        let content = parent.find(".accordion-content");
+        if (parent.hasClass("active")) {
+          content.stop(true, true).slideDown(300); // Slide down when active
+        } else {
+          content.stop(true, true).slideUp(300); // Slide up when inactive
+        }
+      });
     });
   });
 </script>

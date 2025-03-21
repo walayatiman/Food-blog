@@ -10,14 +10,36 @@ import logo from "./logo.webp";
   <nav class="main-menu">
     <div class="container">
       <div class="logo">
-        <ImageContainer item={logo} alt="logo" className="logo" />
+        <a href="/" aria-label="Home"
+          ><ImageContainer item={logo} alt="logo" className="site-logo" /></a
+        >
       </div>
       <div class="right">
         <ul>
           {
-            siteConfig.navLinks.map(({ title, url }) => (
+            siteConfig.navLinks.map(({ title, url, sub_menu }) => (
               <li>
-                <a href={url}>{title}</a>
+                <span>
+                  <a href={url}>{title}</a>
+                  {sub_menu && (
+                    <Icon
+                      size={24}
+                      set="fi"
+                      name="FiChevronDown"
+                      client:load
+                      className="submenu-icon"
+                    />
+                  )}
+                </span>
+                {sub_menu && (
+                  <ul class="sub-menu">
+                    {sub_menu.map(({ title, url }) => (
+                      <li>
+                        <a href={url}>{title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))
           }
@@ -33,7 +55,7 @@ import logo from "./logo.webp";
         <span class="bar"></span>
         <span class="bar"></span>
       </div>
-      <div class="icons">
+      <!-- <div class="icons">
         <Icon
           size={24}
           set="ci"
@@ -48,11 +70,11 @@ import logo from "./logo.webp";
           client:load
           className="cart-btn"
         />
-      </div>
+      </div> -->
     </div>
     <div class="side-menu-container">
       <Icon
-        size={24}
+        size={44}
         set="fi"
         name={"FiXOctagon"}
         client:load
@@ -61,9 +83,29 @@ import logo from "./logo.webp";
 
       <ul class="sideMenu">
         {
-          allLinks.map(({ title, url }) => (
+          allLinks.map(({ title, url, sub_menu }) => (
             <li>
-              <a href={url}>{title}</a>
+              <span class="mobile-submenu">
+                <a href={url}>{title}</a>
+                {sub_menu && (
+                  <Icon
+                    size={34}
+                    set="fi"
+                    name="FiChevronDown"
+                    client:load
+                    className="submenu-icon"
+                  />
+                )}
+              </span>
+              {sub_menu && (
+                <ul class="sub-menu">
+                  {sub_menu.map(({ title, url }) => (
+                    <li>
+                      <a href={url}>{title}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))
         }
@@ -90,57 +132,95 @@ import logo from "./logo.webp";
 </header>
 
 <style>
-  .announcements {
-    @media (max-width: 981px) {
-      .main-menu {
-        display: none;
-      }
-    }
-    .announcement {
-      background-color: var(--creame);
-      text-align: center;
-      color: var(--dark-blue);
-      padding: 10px;
+  header {
+    position: relative;
+    z-index: 50;
+    padding-top: 3rem;
+
+    @media (max-width: 773px) {
+      padding-top: 0;
     }
 
     .main-menu {
-      background-color: var(--dark-blue);
-      padding: 2rem 0;
-      transition: all ease-in-out 0.25s;
+      @media (max-width: 773px) {
+        display: none;
+      }
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
 
-      &:hover {
-        background-color: var(--yellow);
-
-        a,
-        h4 {
-          color: var(--dark-blue) !important;
+      .logo {
+        .site-logo {
+          max-width: 250px;
+          @media (max-width: 920px) {
+            max-width: 120px;
+          }
         }
       }
 
-      .container {
+      .right {
+        background-color: #fff;
+        padding: 10px 3rem;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        border-radius: 300px;
+        ul {
+          display: flex;
+          gap: 2rem;
 
-        .left,
-        .right {
-          ul {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-
-            li {
+          li {
+            position: relative;
+            &:hover {
               a {
-                color: #fff;
-                text-decoration: none;
-                text-transform: uppercase;
+                color: var(--blue);
+              }
+
+              svg {
+                stroke: var(--blue);
+              }
+            }
+            span {
+              display: flex;
+              align-items: start;
+              gap: 5px;
+
+              svg {
+                margin-top: -4px;
+                stroke: var(--dark-blue);
+              }
+            }
+            a {
+              text-decoration: none;
+              color: var(--gray);
+              font-weight: bold;
+            }
+
+            .sub-menu {
+              position: absolute;
+              top: 55px;
+              background-color: #fff;
+              padding: 15px 20px;
+              border-radius: 15px;
+              width: 11rem;
+              opacity: 0;
+              visibility: hidden;
+              transform: translateY(10px);
+              transition:
+                opacity 0.3s ease-in-out,
+                transform 0.3s ease-in-out,
+                visibility 0.3s;
+            }
+
+            &:hover {
+              .sub-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
               }
             }
           }
-        }
-
-        .logo {
-          color: #fff;
         }
       }
     }
@@ -148,10 +228,17 @@ import logo from "./logo.webp";
 
   .mobile {
     position: relative;
-    @media (min-width: 981px) {
+    background-color: var(--dark-blue);
+
+    @media (min-width: 773px) {
       display: none;
     }
-    background-color: var(--dark-blue);
+
+    @media (max-width: 772px) {
+      /* Adjusted to prevent overlap */
+      background-color: transparent;
+    }
+
     .mobile-menu {
       padding-top: 2rem;
       padding-bottom: 2rem;
@@ -185,18 +272,48 @@ import logo from "./logo.webp";
       background-color: var(--yellow);
       transition: all ease-in-out 0.25s;
       z-index: 3;
+      width: 85%;
       ul {
         margin-top: 2rem;
         li {
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
           list-style: none;
+
+          .mobile-submenu {
+            display: flex;
+            position: relative;
+            gap: 2rem;
+          }
+
+          .submenu-icon {
+            transition: all ease-in-out 0.25s;
+            stroke: var(--dark-blue);
+          }
+
+          &.opened {
+            .submenu-icon {
+              transform: rotate(180deg);
+            }
+          }
           a {
             text-decoration: none;
             color: var(--dark-blue);
             font-weight: 400;
             font-family: "Hey";
-            font-size: 20px;
+            font-size: 30px;
           }
+
+          .sub-menu {
+            margin-top: 1rem !important;
+            margin-left: 10px;
+            display: none;
+          }
+
+          /* &.opened {
+            .sub-menu {
+              display: block;
+            }
+          } */
         }
       }
 
@@ -256,20 +373,29 @@ import logo from "./logo.webp";
   }
 </style>
 
-<script is:inline>
-  $("#mobile-menu").on("click", function () {
-    $(".side-menu-container").css("transform", "translateX(0)");
-  });
+<script>
+  $(function () {
+    $("#mobile-menu").on("click", function () {
+      $(".side-menu-container").css("transform", "translateX(0)");
+    });
 
-  $(".close-btn").on("click", function () {
-    $(".side-menu-container").css("transform", "translateX(-100%)");
-  });
+    $(".close-btn").on("click", function () {
+      $(".side-menu-container").css("transform", "translateX(-100%)");
+    });
 
-  $("#search").on("click", function () {
-    $(".search").toggleClass("open");
-  });
+    $("#search").on("click", function () {
+      $(".search").toggleClass("open");
+    });
 
-  $(".search-close-btn").on("click", function () {
-    $(".search").removeClass("open");
+    $(".search-close-btn").on("click", function () {
+      $(".search").removeClass("open");
+    });
+
+    $(".sideMenu .submenu-icon").on("click", function (e) {
+      e.preventDefault();
+      const $grandparent = $(this).parent().parent().parent();
+      $grandparent.toggleClass("opened"); // Toggle class on grandparent
+      $grandparent.find(".sub-menu").slideToggle(100); // Toggle submenu visibility
+    });
   });
 </script>

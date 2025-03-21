@@ -15,7 +15,7 @@ const news = await getCollection("news");
         : null;
 
       return (
-        <li key={article.id}>
+        <li>
           <h2>
             <a href={`/news/${article.slug}/`}>{article.data.title}</a>
           </h2>

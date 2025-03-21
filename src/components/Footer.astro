@@ -73,21 +73,25 @@ const menu = [
         href="http://www.facebook.com"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="follow us on facebook"
         ><IconX size={24} set="fa" name={"FaFacebookF"} client:load /></a
       ><a
         href="http://www.twitter.com"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Follow us on Twitter"
         ><IconX size={24} set="fa" name={"FaTwitter"} client:load /></a
       ><a
         href="http://www.instagram.com"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Follow us on Instagram"
         ><IconX size={24} set="fa" name={"FaInstagram"} client:load /></a
       ><a
         href="http://www.linkedin.com"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Follow us on Linkedin"
         ><IconX size={24} set="fa" name={"FaLinkedinIn"} client:load /></a
       >
     </div>
@@ -111,11 +115,17 @@ const menu = [
     <ul>
       <li>© Copyright AWIN 2025</li>
       <li>Company No. 14657764</li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Cookie Policy</a></li>
+      <li><a href="#" aria-label="privacy policy">Privacy Policy</a></li>
+      <li><a href="#" aria-label="cookie policy">Cookie Policy</a></li>
     </ul>
     <div class="website">
-      <a href="#" target="_blank" rel="follow" class="website-link">
+      <a
+        href="#"
+        target="_blank"
+        rel="follow"
+        class="website-link"
+        aria-label="learn more about the author"
+      >
         <span
           >website by <span class="text-white">rustymace<sup>®</sup></span
           ></span
@@ -348,7 +358,7 @@ const menu = [
   }
 </style>
 
-<script is:inline>
+<script>
   $(function () {
     const $menu = $("#links"); // Select the original <ul>
     const $items = $menu.children("li"); // Get all <li> items

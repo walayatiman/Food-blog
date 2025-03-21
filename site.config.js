@@ -11,11 +11,11 @@ export const siteConfig = {
   navLinks: [
     {
       title: "About",
-      url: "#",
+      url: "about",
     },
     {
       title: "What We do",
-      url: "#",
+      url: "what-we-do",
       sub_menu: [
         {
           title: "Standpipe hire",
@@ -24,16 +24,16 @@ export const siteConfig = {
       ],
     },
     {
-      title: "Section 8 Notices",
+      title: "Section",
       url: "#",
     },
     {
       title: "News",
-      url: "#",
+      url: "news",
     },
     {
       title: "Contact",
-      url: "#",
+      url: "contact",
     },
   ],
 };

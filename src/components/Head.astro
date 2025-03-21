@@ -5,10 +5,7 @@ import Globalstyles from "./Globalstyles.astro";
 
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
   <title>{siteConfig.title} | {siteConfig.metaTitle}</title>
   <meta
@@ -16,6 +13,7 @@ import Globalstyles from "./Globalstyles.astro";
     content={`${siteConfig.title} | ${siteConfig.metaTitle}`}
   />
   <meta name="description" content={`${siteConfig.description}`} />
+  <meta name="description" content="Put your description here." />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -51,8 +49,15 @@ import Globalstyles from "./Globalstyles.astro";
   <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.19/dist/lenis.css" />
+    crossorigin="anonymous"
+    defer></script>
+  <link
+    rel="preload"
+    href="https://unpkg.com/lenis@1.1.19/dist/lenis.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
 
+  <a id="top"></a>
   <Globalstyles />
 </head>

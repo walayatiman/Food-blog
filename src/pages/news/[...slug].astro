@@ -1,23 +1,23 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("news");
 
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
+  return posts.map((post: any) => ({
+    params: { slug: post.slug }, // Ensure slug matches the dynamic route
+    props: post, // Pass full post data
   }));
 }
 
-const { title, description, pubDate, image } = Astro.props.data;
-const body = Astro.props.rendered.html;
+// Correctly extract post from Astro.props
+const post = Astro.props as CollectionEntry<"news">;
+const { title, description, pubDate, image } = post.data;
+const body = post.rendered?.html ?? "";
 ---
 
 <h1>{title}</h1>
 <p><strong>Published:</strong> {pubDate.toDateString()}</p>
-
-{image?.url && <img src={image.url} alt={image.alt} width="500" />}
 
 <p>{description}</p>
 
